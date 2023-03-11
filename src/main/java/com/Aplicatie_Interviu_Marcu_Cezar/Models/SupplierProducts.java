@@ -2,6 +2,7 @@ package com.Aplicatie_Interviu_Marcu_Cezar.Models;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +20,14 @@ public class SupplierProducts {
     }
     public SupplierProducts(){}
 
+    @XmlTransient
     public String getFromOrder() {
         return fromOrder;
     }
     public void setFromOrder(String fromOrder) {
         this.fromOrder = fromOrder;
     }
+
 
     @XmlElement(name="product")
     public List<Product> getProducts() {
@@ -34,6 +37,7 @@ public class SupplierProducts {
         this.products = products;
     }
 
+    @XmlTransient
     public String getToSupplier() {
         return toSupplier;
     }

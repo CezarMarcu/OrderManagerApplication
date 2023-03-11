@@ -67,10 +67,7 @@ public class DirectoryWatcher {
 
                     //Do an action depending on the event kind
                     if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-                        File xmlFile  = new File(directoryPath + "/" + fileName);
-                        System.out.println("A new order was created");
-                        OrderProcessor.ProcessOrders(xmlFile);
-
+                        OrderProcessor.ProcessOrders(new File(directoryPath + "/" + fileName));
                     }
                     else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
                         System.out.println("A file has been deleted: " + fileName);

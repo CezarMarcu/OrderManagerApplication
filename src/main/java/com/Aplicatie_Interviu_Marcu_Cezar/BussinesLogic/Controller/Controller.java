@@ -10,14 +10,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("/admin")
 public class Controller {
 
     private  List<Product> products = new ArrayList<>();
-    private  List<Order> orders = new ArrayList<>();
+    private  final List<Order> orders = new ArrayList<>();
 
     @ModelAttribute
     public Product getProduct(){
@@ -28,14 +27,12 @@ public class Controller {
         return new Order(this.products);
     }
 
-
     @GetMapping
     public String showProducts(Model model){
         model.addAttribute("products", this.products);
         model.addAttribute("orders",this.orders);
         return "admin";
     }
-
     @PostMapping
     public String saveProducts(@Valid Product product, Errors errors){
         if(!(errors.hasErrors())){
@@ -46,11 +43,9 @@ public class Controller {
     }
 
     @PostMapping(params="placeOrder=true")
-    public String placeOrder(Order order){
-        List<Product> products = this.products;
+    public String placeOrder(Order order) {
         order.setProducts(products);
         orders.add(order);
-//      this.products.clear();
         return "redirect:admin";
     }
 

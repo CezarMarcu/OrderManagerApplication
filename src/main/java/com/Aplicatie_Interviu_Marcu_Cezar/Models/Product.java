@@ -1,29 +1,46 @@
 package com.Aplicatie_Interviu_Marcu_Cezar.Models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import java.util.Date;
 import java.util.Random;
+
 
 @Data
 @AllArgsConstructor
-@Entity
+@XmlRootElement(name = "product")
 public class Product {
 
     //ATTRIBUTES
     @NotEmpty(message = "Description cannot be null.")
     private String description;
-    @Id
+    private Date orderDate;
     private String gtin;
-    private Long price=0L;
+    private Double price= (double) 0;
+
+    @XmlTransient
+    public Date getOrderDate() {
+        return orderDate;
+    }
+
+    @XmlAttribute
+    public String getCurrency() {
+        return currency;
+    }
+
+    private String currency = "USD";
     @NotEmpty(message = "Supplier cannot be null.")
     private String supplier;
 
 
     //CONSTRUCTOR
-    public Product(String description, Long price, String supplier){
+    public Product(String description, double price, String supplier,Date orderDate){
+        this.orderDate = orderDate;
         this.description = description;
         generateGtin();
         this.price = price;
@@ -32,7 +49,6 @@ public class Product {
     public Product(){
         generateGtin();
     }
-
 
     //METHODS
     private void generateGtin(){

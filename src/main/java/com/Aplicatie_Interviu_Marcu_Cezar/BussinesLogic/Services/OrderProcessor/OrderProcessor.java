@@ -32,11 +32,22 @@ public class OrderProcessor {
                 .boxed()
                 .collect(Collectors.toMap(suppliers::get, supplierProducts::get));
 
+
+
+        for(Order order:orders){
+            for(Product product : order.getProducts()){
+                product.setOrderDate(order.getCreated());
+            }
+        }
+
+
         //POPULATE THE CREATED MAP
         List<Product>products = orders
                 .stream()
                 .map(Order::getProducts)
                 .flatMap(Collection::stream)
+                .sorted(Comparator.comparing(Product::getPrice).reversed()
+                        .thenComparing(Product::getOrderDate).reversed())
                 .toList();
 
         for(Product product : products){
@@ -44,6 +55,7 @@ public class OrderProcessor {
                 supplierTable.get(product.getSupplier()).add(product);
             }
         }
+
         return supplierTable;
     }
 

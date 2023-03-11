@@ -1,11 +1,15 @@
 package com.Aplicatie_Interviu_Marcu_Cezar.Models;
 
+import com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Formatters.DatetimeFormatter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -14,7 +18,7 @@ import java.util.Random;
 public class Order {
 
     //ATRIBURES
-    private  String created;
+    private Date created;
     private String id;
     private List<Product> products;
 
@@ -22,7 +26,9 @@ public class Order {
     //CONSTRUCTOR
     public Order (List<Product> products) {
         generateOrderId();
-        this.created = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy'-'MM'-'dd'T'HH':'mm':'ss"));
+        LocalDateTime localDateTime = LocalDateTime.now();
+        Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
+        this.created = Date.from(instant);
         this.products = products;
     }
     public Order(){}
@@ -41,10 +47,11 @@ public class Order {
     }
 
     @XmlAttribute(name = "created")
-    public String getCreated() {
+    @XmlJavaTypeAdapter(DatetimeFormatter.class)
+    public Date getCreated() {
         return created;
     }
-    public void setCreated(String created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 

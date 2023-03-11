@@ -11,7 +11,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -34,42 +33,6 @@ class AplicatieInterviuMarcuCezarApplicationTests {
 				.collect(StringBuilder::new,StringBuilder::appendCodePoint, StringBuilder::append)
 				.toString();
 		System.out.println(generatedId);
-	}
-
-	@Test
-	void OrderClassTest(){
-		List<Product>products = new ArrayList<>();
-		products.add(new Product("MacBook Pro M1", 100L, "Apple"));
-		products.add(new Product("MacBook Pro M2", 200L, "Apple"));
-		Order order = new Order(products);
-		System.out.println(order);
-	}
-
-	@Test
-	void ProductClassTest(){
-		Product product = new Product("MacBook", 100L,"Apple");
-		System.out.println(product);
-	}
-
-	@Test
-	void generateXmlFile()throws Exception{
-		JAXBContext contextObj1 = JAXBContext.newInstance(Orders.class);
-		Marshaller marshallerObj1 = contextObj1.createMarshaller();
-		marshallerObj1.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-
-		List<Product> products = new ArrayList<>();
-
-		products.add(new Product("MacBook",100L,"Apple"));
-		products.add(new Product("MacBook",100L,"Apple"));
-		products.add(new Product("MacBook",100L,"Apple"));
-
-		List<Order> orders = new ArrayList<>();
-		orders.add(new Order(products));
-		orders.add(new Order(products));
-		orders.add(new Order(products));
-
-		Orders ordersList=new Orders(orders);
-		marshallerObj1.marshal(ordersList, new FileOutputStream("Results/Orders/orders.xml"));
 	}
 
 	@Test

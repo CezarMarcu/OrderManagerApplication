@@ -42,8 +42,10 @@ public class XmlHandler {
             marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshallerObj.marshal(supplierProducts,
                     new FileOutputStream(
-                            "/Users/marcucezar/Desktop/Aplicatie_Interviu_Marcu_Cezar/Results/Suppliers/"
-                            +supplierProducts.getToSupplier()+supplierProducts.getFromOrder()+".xml"));
+                            System.getProperty("user.dir") +"/Results/Suppliers/"
+                            +supplierProducts.getToSupplier()
+                            +supplierProducts.getFromOrder()+".xml")
+            );
     }
 
 
