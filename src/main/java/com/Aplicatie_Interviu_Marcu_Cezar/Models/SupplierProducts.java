@@ -9,6 +9,8 @@ import java.util.List;
 public class SupplierProducts {
 
     private String fromOrder;
+
+
     private String toSupplier;
     private List<Product> products = new ArrayList<>();
 
@@ -40,6 +42,15 @@ public class SupplierProducts {
     }
     public void setToSupplier(String toSupplier) {
         this.toSupplier = toSupplier;
+    }
+
+    @Override
+    public String toString() {
+        return "SupplierProducts{" +
+                "fromOrder='" + fromOrder + '\'' +
+                ", toSupplier='" + toSupplier + '\'' +
+                ", products=" + products +
+                '}';
     }
 }
 

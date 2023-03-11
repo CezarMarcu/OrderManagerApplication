@@ -7,12 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import javax.xml.bind.Unmarshaller;
 
 
@@ -93,8 +92,30 @@ class AplicatieInterviuMarcuCezarApplicationTests {
 	}
 
 	@Test
-	void generateOrderFileName(){
-		System.out.println(XmlHandler.generateFileName());
+	void getSuppliersFromOrderList() throws JAXBException {
+		String ordersFile = "/Users/marcucezar/Desktop/Aplicatie_Interviu_Marcu_Cezar/Results/Orders/orders.xml";
+
+		List<String>suppliers = XmlHandler.extractObjectFromXml(ordersFile)
+				.stream()
+				.map(Order::getProducts)
+				.flatMap(Collection::stream)
+				.map(Product::getSupplier).distinct()
+				.toList();
+		System.out.println(suppliers);
+
+
+		List<List<Product>> supplierProducts = new ArrayList<>();
+		for(String ignored :suppliers){
+			supplierProducts.add(new ArrayList<>());
+		}
+		System.out.println(supplierProducts);
+
+
+		Map<String, List<Product>> supplierTable = new HashMap<>();
+		for (int i = 0; i < suppliers.size(); i++) {
+			supplierTable.put(suppliers.get(i), supplierProducts.get(i));
+		}
+		System.out.println(supplierTable);
 	}
 
 }
