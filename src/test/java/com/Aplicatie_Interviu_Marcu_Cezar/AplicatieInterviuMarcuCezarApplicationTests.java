@@ -131,4 +131,10 @@ class AplicatieInterviuMarcuCezarApplicationTests {
 		System.out.println(fileId);
 	}
 
+	@Test
+	void getActualLocation(){
+		String location = System.getProperty("user.dir");
+		System.out.println(location);
+	}
+
 }

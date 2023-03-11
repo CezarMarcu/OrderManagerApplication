@@ -5,8 +5,8 @@ import com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Services.DirectoryWatche
 public class DirectoryWatchRunnable implements Runnable{
     @Override
     public void run() {
-        String directory = "/Users/marcucezar/Desktop/Aplicatie_Interviu_Marcu_Cezar/Results/Orders";
-        DirectoryWatcher directoryWatcher = new DirectoryWatcher(directory);
+        DirectoryWatcher directoryWatcher = new DirectoryWatcher(System.getProperty("user.dir")
+                + "/Results/Orders");
         directoryWatcher.myWatchBegins();
     }
 }
