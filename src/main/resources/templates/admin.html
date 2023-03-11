@@ -46,6 +46,7 @@
                 </div>
                 <div style="margin-top:1rem">
                     <h5>Products</h5>
+
                     <form th:object="${product}" method="post">
                         <table class="table table-bordered table-sm mt-1">
                             <thead>
@@ -61,7 +62,7 @@
                             <tr th:each="product:${products}">
                                 <td th:text="${product.Description}"></td>
                                 <td th:text="${product.Gtin}"></td>
-                                <td th:text="${product.Price}"></td>
+                                <td th:text="${product.Value}"></td>
                                 <td th:text="${product.Supplier}"></td>
                             </tr>
                             </tbody>
@@ -77,7 +78,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="author" class="form-label">Price</label>
-                                <input type="text" class="form-control" id="author" th:field="*{price}"/>
+                                <input type="text" class="form-control" id="author" th:field="*{value}"/>
                             </div>
                             <div class="mb-3">
                                 <label for="edit" class="form-label">Supplier</label>

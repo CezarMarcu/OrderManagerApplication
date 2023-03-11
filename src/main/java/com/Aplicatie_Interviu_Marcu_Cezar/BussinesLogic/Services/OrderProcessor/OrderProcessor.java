@@ -46,7 +46,7 @@ public class OrderProcessor {
                 .stream()
                 .map(Order::getProducts)
                 .flatMap(Collection::stream)
-                .sorted(Comparator.comparing(Product::getPrice).reversed()
+                .sorted(Comparator.comparing(Product::getValue).reversed()
                         .thenComparing(Product::getOrderDate).reversed())
                 .toList();
 

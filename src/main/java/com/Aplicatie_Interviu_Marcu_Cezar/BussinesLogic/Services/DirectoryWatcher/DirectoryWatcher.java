@@ -67,7 +67,8 @@ public class DirectoryWatcher {
 
                     //Do an action depending on the event kind
                     if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-                        OrderProcessor.ProcessOrders(new File(directoryPath + "/" + fileName));
+                       OrderProcessor.ProcessOrders(new File(directoryPath + "/" + fileName));
+                       System.out.println("FILE PROCESSED");
                     }
                     else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
                         System.out.println("A file has been deleted: " + fileName);

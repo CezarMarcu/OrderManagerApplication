@@ -51,7 +51,6 @@ public class XmlHandler {
 
     //Method that extracts the list of orders from xml file
     public static List<Order> extractObjectFromXml(File xmlFile) throws JAXBException {
-        //File file = new File(xmlFile);
         System.out.print(xmlFile);
         JAXBContext jaxbContext = JAXBContext.newInstance(Orders.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
