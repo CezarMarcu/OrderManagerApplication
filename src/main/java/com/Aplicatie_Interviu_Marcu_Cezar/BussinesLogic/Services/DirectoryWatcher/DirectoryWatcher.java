@@ -3,6 +3,7 @@ package com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Services.DirectoryWatch
 //IMPORTS
 import com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Services.OrderProcessor.OrderProcessor;
 
+import java.io.File;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.nio.file.StandardWatchEventKinds;
@@ -66,8 +67,12 @@ public class DirectoryWatcher {
 
                     //Do an action depending on the event kind
                     if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-                        OrderProcessor.ProcessOrders();
-                    } else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
+                        System.out.println("File " + directoryPath +"/"+ fileName + " was created");
+                        File xmlFile  = new File(directoryPath + "/" + fileName);
+                        OrderProcessor.ProcessOrders(xmlFile);
+
+                    }
+                    else if (kind == StandardWatchEventKinds.ENTRY_DELETE) {
                         System.out.println("A file has been deleted: " + fileName);
                     }
                     //Reset the watch key

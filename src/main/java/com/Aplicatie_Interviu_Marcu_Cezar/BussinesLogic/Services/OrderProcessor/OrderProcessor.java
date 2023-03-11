@@ -6,14 +6,15 @@ import com.Aplicatie_Interviu_Marcu_Cezar.Models.Product;
 import com.Aplicatie_Interviu_Marcu_Cezar.Models.SupplierProducts;
 
 import javax.xml.bind.JAXBException;
+import java.io.File;
+//import java.nio.file.Path;
 import java.util.*;
 
 public class OrderProcessor {
 
-    private static final String ordersPath = "/Users/marcucezar/Desktop/Aplicatie_Interviu_Marcu_Cezar/Results/Orders/orders.xml";
 
-    private static Map<String, List<Product>> getSupplierMap() throws JAXBException {
-        List<Order> orders = XmlHandler.extractObjectFromXml(ordersPath);
+    private static Map<String, List<Product>> getSupplierMap(File xmlFile) throws JAXBException {
+        List<Order> orders = XmlHandler.extractObjectFromXml(xmlFile);
 
         //Create the Map
         List<String>suppliers = orders
@@ -33,7 +34,6 @@ public class OrderProcessor {
             supplierTable.put(suppliers.get(i), supplierProducts.get(i));
         }
 
-
         //Populate the created Map
         List<Product>products = orders
                 .stream()
@@ -51,17 +51,14 @@ public class OrderProcessor {
         return supplierTable;
     }
 
-    public static void ProcessOrders() throws Exception {
-        Map<String, List<Product>> suppliersTable = OrderProcessor.getSupplierMap();
+    public static void ProcessOrders(File xmlFile) throws Exception {
+        Map<String, List<Product>> suppliersTable = OrderProcessor.getSupplierMap(xmlFile);
         List<SupplierProducts>supplierProducts = new ArrayList<>();
         for (Map.Entry<String,List<Product>> entry : suppliersTable.entrySet()){
-//			System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
             supplierProducts.add(new SupplierProducts("23", entry.getKey(), entry.getValue()));
         }
         for(SupplierProducts sp :supplierProducts){
             XmlHandler.generateSupplierXmlFile(sp);
         }
     }
-
-
 }

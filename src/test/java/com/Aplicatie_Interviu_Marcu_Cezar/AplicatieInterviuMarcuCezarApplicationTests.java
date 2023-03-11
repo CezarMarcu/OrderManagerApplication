@@ -11,6 +11,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.Path;
 import java.util.*;
 import javax.xml.bind.Unmarshaller;
 
@@ -94,8 +95,8 @@ class AplicatieInterviuMarcuCezarApplicationTests {
 	@Test
 	void getSuppliersFromOrderList() throws JAXBException {
 		String ordersFile = "/Users/marcucezar/Desktop/Aplicatie_Interviu_Marcu_Cezar/Results/Orders/orders.xml";
-
-		List<String>suppliers = XmlHandler.extractObjectFromXml(ordersFile)
+		File xmlFile = new File(ordersFile);
+		List<String>suppliers = XmlHandler.extractObjectFromXml(xmlFile)
 				.stream()
 				.map(Order::getProducts)
 				.flatMap(Collection::stream)

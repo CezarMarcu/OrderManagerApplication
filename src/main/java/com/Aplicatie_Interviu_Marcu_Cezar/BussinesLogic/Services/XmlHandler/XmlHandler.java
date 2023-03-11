@@ -13,11 +13,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
 
+
 public class XmlHandler {
 
     //Method that generates a name for orders xml file that respects a regex
     private static String generateFileName(){
-        Generex generex = new Generex("orders[0-9]{2}");
+        Generex generex = new Generex("order[0-9]{2}");
         return generex.random();
     }
 
@@ -29,33 +30,30 @@ public class XmlHandler {
         System.out.println(orders);
         Orders ordersList=new Orders(orders);
         System.out.println(ordersList);
-        marshallerObj1.marshal(ordersList, new FileOutputStream("Results/Orders/order.xml"));
+        marshallerObj1.marshal(ordersList,
+                new FileOutputStream("Results/Orders/"+XmlHandler.generateFileName()+".xml"));
     }
 
 
-    //Method that generates an xml file for supplier
+    //Method that generates a xml file for supplier
     public static void generateSupplierXmlFile(SupplierProducts supplierProducts) throws Exception {
             JAXBContext contextObj = JAXBContext.newInstance(SupplierProducts.class);
             Marshaller marshallerObj = contextObj.createMarshaller();
             marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            marshallerObj.marshal(supplierProducts, new FileOutputStream("/Users/marcucezar/Desktop/Aplicatie_Interviu_Marcu_Cezar/Results/Suppliers/"+supplierProducts.getToSupplier()+supplierProducts.getFromOrder()+".xml"));
+            marshallerObj.marshal(supplierProducts,
+                    new FileOutputStream(
+                            "/Users/marcucezar/Desktop/Aplicatie_Interviu_Marcu_Cezar/Results/Suppliers/"
+                            +supplierProducts.getToSupplier()+supplierProducts.getFromOrder()+".xml"));
     }
 
 
     //Method that extracts the list of orders from xml file
-    public static List<Order> extractObjectFromXml(String xmlFile) throws JAXBException {
-        File file = new File(xmlFile);
+    public static List<Order> extractObjectFromXml(File xmlFile) throws JAXBException {
+        //File file = new File(xmlFile);
+        System.out.print(xmlFile);
         JAXBContext jaxbContext = JAXBContext.newInstance(Orders.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        Orders orders= (Orders) jaxbUnmarshaller.unmarshal(file);
+        Orders orders= (Orders) jaxbUnmarshaller.unmarshal(xmlFile);
         return orders.getOrders();
     }
-
-
-    //TO DO
-    //Generate XML file for every supplier with sorted products by price
-//    public static void generateSupplierFiles(List<SupplierProducts> supplierProducts){}
-
-    //TO DO
-    //public static void processOrders(){}
 }
