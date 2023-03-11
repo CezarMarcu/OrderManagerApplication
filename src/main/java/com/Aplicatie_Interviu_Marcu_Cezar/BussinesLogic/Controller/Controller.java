@@ -3,14 +3,14 @@ package com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Controller;
 import com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Services.XmlHandler.XmlHandler;
 import com.Aplicatie_Interviu_Marcu_Cezar.Models.Order;
 import com.Aplicatie_Interviu_Marcu_Cezar.Models.Product;
+import jakarta.validation.Valid;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @org.springframework.stereotype.Controller
 @RequestMapping("/admin")
@@ -37,9 +37,12 @@ public class Controller {
     }
 
     @PostMapping
-    public String saveProducts(Product product){
-        products.add(product);
-        return "redirect:admin";
+    public String saveProducts(@Valid Product product, Errors errors){
+        if(!(errors.hasErrors())){
+            products.add(product);
+            return "redirect:admin";
+        }
+        return "admin";
     }
 
     @PostMapping(params="placeOrder=true")
@@ -47,11 +50,7 @@ public class Controller {
         List<Product> products = this.products;
         order.setProducts(products);
         orders.add(order);
-        System.out.println("Order registered" + order);
-        System.out.println("Your orders" + orders);
-        System.out.println("-------------------------------------------");
-//        this.products.clear();
-
+//      this.products.clear();
         return "redirect:admin";
     }
 
@@ -59,8 +58,7 @@ public class Controller {
     public String  generateXML()throws Exception{
         XmlHandler.generateXmlFile(orders);
         orders.clear();
-        System.out.println("XML GENERATED WITH SUCCESS");
+        products.clear();
         return "redirect:admin";
     }
-
 }

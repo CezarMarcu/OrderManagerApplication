@@ -67,8 +67,8 @@ public class DirectoryWatcher {
 
                     //Do an action depending on the event kind
                     if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-                        System.out.println("File " + directoryPath +"/"+ fileName + " was created");
                         File xmlFile  = new File(directoryPath + "/" + fileName);
+                        System.out.println("A new order was created");
                         OrderProcessor.ProcessOrders(xmlFile);
 
                     }

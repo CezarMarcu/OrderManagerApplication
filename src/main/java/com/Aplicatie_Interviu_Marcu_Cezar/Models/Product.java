@@ -1,17 +1,24 @@
 package com.Aplicatie_Interviu_Marcu_Cezar.Models;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import java.util.Random;
 
 @Data
 @AllArgsConstructor
+@Entity
 public class Product {
 
     //ATTRIBUTES
+    @NotEmpty(message = "Description cannot be null.")
     private String description;
+    @Id
     private String gtin;
-    private Long price;
+    private Long price=0L;
+    @NotEmpty(message = "Supplier cannot be null.")
     private String supplier;
 
 

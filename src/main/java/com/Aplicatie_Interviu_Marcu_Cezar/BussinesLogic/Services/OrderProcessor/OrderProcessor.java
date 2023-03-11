@@ -7,16 +7,16 @@ import com.Aplicatie_Interviu_Marcu_Cezar.Models.SupplierProducts;
 
 import javax.xml.bind.JAXBException;
 import java.io.File;
-//import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class OrderProcessor {
 
+    private static Map<String, ArrayList<Product>> getSupplierMap(File xmlFile) throws JAXBException {
 
-    private static Map<String, List<Product>> getSupplierMap(File xmlFile) throws JAXBException {
         List<Order> orders = XmlHandler.extractObjectFromXml(xmlFile);
-
-        //Create the Map
+        //CREATE THE MAP
         List<String>suppliers = orders
                 .stream()
                 .map(Order::getProducts)
@@ -24,38 +24,36 @@ public class OrderProcessor {
                 .map(Product::getSupplier).distinct()
                 .toList();
 
-        List<List<Product>> supplierProducts = new ArrayList<>();
-        for(String ignored :suppliers){
-            supplierProducts.add(new ArrayList<>());
-        }
+        List<ArrayList<Product>>supplierProducts = suppliers.stream()
+                .map((supplier)->new ArrayList<Product>())
+                .toList();
 
-        Map<String, List<Product>> supplierTable = new HashMap<>();
-        for (int i = 0; i < suppliers.size(); i++) {
-            supplierTable.put(suppliers.get(i), supplierProducts.get(i));
-        }
+        Map<String, ArrayList<Product>> supplierTable = IntStream.range(0, suppliers.size())
+                .boxed()
+                .collect(Collectors.toMap(suppliers::get, supplierProducts::get));
 
-        //Populate the created Map
+        //POPULATE THE CREATED MAP
         List<Product>products = orders
                 .stream()
                 .map(Order::getProducts)
                 .flatMap(Collection::stream)
                 .toList();
 
-        String supplier;
         for(Product product : products){
-            supplier = product.getSupplier();
-            if(supplierTable.containsKey(supplier)){
-                supplierTable.get(supplier).add(product);
+            if(supplierTable.containsKey(product.getSupplier())){
+                supplierTable.get(product.getSupplier()).add(product);
             }
         }
         return supplierTable;
     }
 
+
     public static void ProcessOrders(File xmlFile) throws Exception {
-        Map<String, List<Product>> suppliersTable = OrderProcessor.getSupplierMap(xmlFile);
+        Map<String, ArrayList<Product>> suppliersTable = OrderProcessor.getSupplierMap(xmlFile);
         List<SupplierProducts>supplierProducts = new ArrayList<>();
-        for (Map.Entry<String,List<Product>> entry : suppliersTable.entrySet()){
-            supplierProducts.add(new SupplierProducts("23", entry.getKey(), entry.getValue()));
+
+        for (Map.Entry<String,ArrayList<Product>> entry : suppliersTable.entrySet()){
+            supplierProducts.add(new SupplierProducts(xmlFile.getName().substring(5,7), entry.getKey(), entry.getValue()));
         }
         for(SupplierProducts sp :supplierProducts){
             XmlHandler.generateSupplierXmlFile(sp);

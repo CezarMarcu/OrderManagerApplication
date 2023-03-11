@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Path;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import javax.xml.bind.Unmarshaller;
 
 
@@ -94,29 +96,39 @@ class AplicatieInterviuMarcuCezarApplicationTests {
 
 	@Test
 	void getSuppliersFromOrderList() throws JAXBException {
-		String ordersFile = "/Users/marcucezar/Desktop/Aplicatie_Interviu_Marcu_Cezar/Results/Orders/orders.xml";
+		String ordersFile = "/Users/marcucezar/Desktop/Aplicatie_Interviu_Marcu_Cezar/Results/Orders/orders23.xml";
+		String orderId = ordersFile.split("/")[ordersFile.split("/").length -1].substring(6,8);
+		System.out.println(orderId);
 		File xmlFile = new File(ordersFile);
+
 		List<String>suppliers = XmlHandler.extractObjectFromXml(xmlFile)
 				.stream()
 				.map(Order::getProducts)
 				.flatMap(Collection::stream)
 				.map(Product::getSupplier).distinct()
 				.toList();
+
+		List<ArrayList<Product>>supplierProducts = suppliers.stream()
+				.map((supplier)->new ArrayList<Product>())
+				.toList();
+
+		Map<String, ArrayList<Product>> supplierTable = IntStream.range(0, suppliers.size())
+				.boxed()
+				.collect(Collectors.toMap(suppliers::get, supplierProducts::get));
+
+
 		System.out.println(suppliers);
-
-
-		List<List<Product>> supplierProducts = new ArrayList<>();
-		for(String ignored :suppliers){
-			supplierProducts.add(new ArrayList<>());
-		}
 		System.out.println(supplierProducts);
-
-
-		Map<String, List<Product>> supplierTable = new HashMap<>();
-		for (int i = 0; i < suppliers.size(); i++) {
-			supplierTable.put(suppliers.get(i), supplierProducts.get(i));
-		}
 		System.out.println(supplierTable);
+
+	}
+
+	@Test
+	void getIdOfOrdersFile(){
+		String ordersFile = "/Users/marcucezar/Desktop/Aplicatie_Interviu_Marcu_Cezar/Results/Orders/orders23.xml";
+		File file = new File(ordersFile);
+		String fileId = file.getName().substring(6,8);
+		System.out.println(fileId);
 	}
 
 }

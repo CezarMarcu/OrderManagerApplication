@@ -9,8 +9,6 @@ import java.util.List;
 public class SupplierProducts {
 
     private String fromOrder;
-
-
     private String toSupplier;
     private List<Product> products = new ArrayList<>();
 
@@ -21,7 +19,6 @@ public class SupplierProducts {
     }
     public SupplierProducts(){}
 
-    @XmlElement(name = "fromOrder")
     public String getFromOrder() {
         return fromOrder;
     }
