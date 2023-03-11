@@ -33,20 +33,18 @@ public class OrderProcessor {
                 .collect(Collectors.toMap(suppliers::get, supplierProducts::get));
 
 
-
         for(Order order:orders){
             for(Product product : order.getProducts()){
                 product.setOrderDate(order.getCreated());
             }
         }
 
-
         //POPULATE THE CREATED MAP
         List<Product>products = orders
                 .stream()
                 .map(Order::getProducts)
                 .flatMap(Collection::stream)
-                .sorted(Comparator.comparing(Product::getValue).reversed()
+                .sorted(Comparator.comparing((Product p)->p.getPriceTag().getValue()).reversed()
                         .thenComparing(Product::getOrderDate).reversed())
                 .toList();
 

@@ -36,7 +36,7 @@ public class Controller {
     @PostMapping
     public String saveProducts(@Valid Product product, Errors errors){
         if(!(errors.hasErrors())){
-            product.getPriceTag().setValue(product.getValue());
+//            product.getPriceTag().setValue(product.getValue());
             products.add(product);
             System.out.println(product);
             return "redirect:admin";

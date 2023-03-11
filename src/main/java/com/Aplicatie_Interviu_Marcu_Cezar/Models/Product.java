@@ -21,7 +21,6 @@ public class Product {
     private String description;
     private Date orderDate;
     private String gtin;
-    private Double value;
     private PriceTag priceTag = new PriceTag();
     @NotEmpty(message = "Supplier cannot be null.")
     private String supplier;
@@ -40,10 +39,6 @@ public class Product {
     @XmlTransient
     public Date getOrderDate() {
         return orderDate;
-    }
-    @XmlTransient
-    public Double getValue() {
-        return value;
     }
 
 
