@@ -1,19 +1,12 @@
 package com.Aplicatie_Interviu_Marcu_Cezar;
 
 import com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Services.DirectoryWatcher.DirectoryWatcher;
-import com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Services.XmlHandler.XmlHandler;
 import com.Aplicatie_Interviu_Marcu_Cezar.Models.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import javax.xml.bind.Unmarshaller;
 
 
@@ -44,7 +37,7 @@ class AplicatieInterviuMarcuCezarApplicationTests {
 
 	@Test
 	void getObjectFromXml()throws Exception{
-		String xmlFile = "C:\\Users\\marcu_c1\\Desktop\\demo\\Results\\Orders\\orders.xml";
+		String xmlFile = "string_to_xml_file";
 		File file = new File(xmlFile);
 		JAXBContext jaxbContext = JAXBContext.newInstance(Orders.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -58,37 +51,8 @@ class AplicatieInterviuMarcuCezarApplicationTests {
 	}
 
 	@Test
-	void getSuppliersFromOrderList() throws JAXBException {
-		String ordersFile = "/Users/marcucezar/Desktop/Aplicatie_Interviu_Marcu_Cezar/Results/Orders/orders23.xml";
-		String orderId = ordersFile.split("/")[ordersFile.split("/").length -1].substring(6,8);
-		System.out.println(orderId);
-		File xmlFile = new File(ordersFile);
-
-		List<String>suppliers = XmlHandler.extractObjectFromXml(xmlFile)
-				.stream()
-				.map(Order::getProducts)
-				.flatMap(Collection::stream)
-				.map(Product::getSupplier).distinct()
-				.toList();
-
-		List<ArrayList<Product>>supplierProducts = suppliers.stream()
-				.map((supplier)->new ArrayList<Product>())
-				.toList();
-
-		Map<String, ArrayList<Product>> supplierTable = IntStream.range(0, suppliers.size())
-				.boxed()
-				.collect(Collectors.toMap(suppliers::get, supplierProducts::get));
-
-
-		System.out.println(suppliers);
-		System.out.println(supplierProducts);
-		System.out.println(supplierTable);
-
-	}
-
-	@Test
 	void getIdOfOrdersFile(){
-		String ordersFile = "/Users/marcucezar/Desktop/Aplicatie_Interviu_Marcu_Cezar/Results/Orders/orders23.xml";
+		String ordersFile = "string_to_xml_file";
 		File file = new File(ordersFile);
 		String fileId = file.getName().substring(6,8);
 		System.out.println(fileId);

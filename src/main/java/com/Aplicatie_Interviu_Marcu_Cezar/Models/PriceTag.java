@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlValue;
 public class PriceTag {
     //ATTRIBUTES
     private final String currency = "USD";
-    private Double value;
+    private Double value = 0.0;
 
 
     //CONSTRUCTOR

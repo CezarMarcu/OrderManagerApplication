@@ -45,7 +45,6 @@ public class Controller {
     public String saveProducts(@Valid Product product, Errors errors){
         if(!(errors.hasErrors())){
             products.add(product);
-            System.out.println(product);
             return "redirect:admin";
         }
         return "admin";
@@ -55,12 +54,7 @@ public class Controller {
     public String placeOrder(Order order) {
         order.setProducts(new ArrayList<>(products));
         orders.add(order);
-        System.out.println(order);
         products.clear();
-        System.out.println(order);
-
-
-
         return "redirect:admin";
     }
 

@@ -26,9 +26,7 @@ public class XmlHandler {
         JAXBContext contextObj1 = JAXBContext.newInstance(Orders.class);
         Marshaller marshallerObj1 = contextObj1.createMarshaller();
         marshallerObj1.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        System.out.println(orders);
         Orders ordersList=new Orders(orders);
-        System.out.println(ordersList);
         marshallerObj1.marshal(ordersList,
                 new FileOutputStream("Results/Orders/"+XmlHandler.generateFileName()+".xml"));
     }
@@ -48,7 +46,6 @@ public class XmlHandler {
 
     //Method that extracts the list of orders from xml file
     public static List<Order> extractObjectFromXml(File xmlFile) throws JAXBException {
-        System.out.print(xmlFile);
         JAXBContext jaxbContext = JAXBContext.newInstance(Orders.class);
         Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
         Orders orders= (Orders) jaxbUnmarshaller.unmarshal(xmlFile);

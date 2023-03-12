@@ -63,7 +63,6 @@ import java.util.concurrent.Executors;
 *
 *		Libraries used for testing:
 * 				->JUnit
-*
 * */
 @SpringBootApplication
 public class AplicatieInterviuMarcuCezarApplication {
