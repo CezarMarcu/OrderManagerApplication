@@ -30,14 +30,14 @@ class AplicatieInterviuMarcuCezarApplicationTests {
 
 	@Test
 	void watchDirectory(){
-		String directory = "C:\\Users\\marcu_c1\\Desktop\\demo\\Results\\Orders";
+		String directory = "path_to_xml_file";
 		DirectoryWatcher directoryWatcher = new DirectoryWatcher(directory);
 		directoryWatcher.myWatchBegins();
 	}
 
 	@Test
 	void getObjectFromXml()throws Exception{
-		String xmlFile = "string_to_xml_file";
+		String xmlFile = "path_to_xml_file";
 		File file = new File(xmlFile);
 		JAXBContext jaxbContext = JAXBContext.newInstance(Orders.class);
 		Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
@@ -52,7 +52,7 @@ class AplicatieInterviuMarcuCezarApplicationTests {
 
 	@Test
 	void getIdOfOrdersFile(){
-		String ordersFile = "string_to_xml_file";
+		String ordersFile = "path_to_xml_file";
 		File file = new File(ordersFile);
 		String fileId = file.getName().substring(6,8);
 		System.out.println(fileId);
