@@ -12,9 +12,16 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class OrderProcessor {
-
+    /*
+    --------------------------------------------------------------------------------------------------------------------
+                                                DOCUMENTATION
+    --------------------------------------------------------------------------------------------------------------------
+    This component is responsible to process the input xml files. Its main tasks are :
+        ->To get the list of orders from the xml file
+        ->To generate a supplier map in order to map the products with their own suppliers
+        ->Based on the generated supplier map generate xml files for every supplier-supplier products  pair
+*/
     private static Map<String, ArrayList<Product>> getSupplierMap(File xmlFile) throws JAXBException {
-
         List<Order> orders = XmlHandler.extractObjectFromXml(xmlFile);
         //CREATE THE MAP
         List<String>suppliers = orders
@@ -32,13 +39,12 @@ public class OrderProcessor {
                 .boxed()
                 .collect(Collectors.toMap(suppliers::get, supplierProducts::get));
 
-
+        //FOR EVERY PRODUCT SET THE ORDER CREATE DATE
         for(Order order:orders){
             for(Product product : order.getProducts()){
                 product.setOrderDate(order.getCreated());
             }
         }
-
         //POPULATE THE CREATED MAP
         List<Product>products = orders
                 .stream()
@@ -53,10 +59,8 @@ public class OrderProcessor {
                 supplierTable.get(product.getSupplier()).add(product);
             }
         }
-
         return supplierTable;
     }
-
 
     public static void ProcessOrders(File xmlFile) throws Exception {
         Map<String, ArrayList<Product>> suppliersTable = OrderProcessor.getSupplierMap(xmlFile);

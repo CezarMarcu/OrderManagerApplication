@@ -62,7 +62,7 @@ import java.util.concurrent.Executors;
 * 							chose to run this component on a separate thread.
 *
 *		Libraries used for testing:
-* 				->Junit
+* 				->JUnit
 *
 * */
 @SpringBootApplication
@@ -73,5 +73,4 @@ public class AplicatieInterviuMarcuCezarApplication {
 		ExecutorService executor = Executors.newCachedThreadPool();
 		executor.submit(new DirectoryWatchRunnable());
 	}
-
 }

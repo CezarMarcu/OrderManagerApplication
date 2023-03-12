@@ -1,7 +1,6 @@
 package com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Formatters;
 
 import org.springframework.stereotype.Component;
-
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,7 +17,7 @@ public class DatetimeFormatter extends XmlAdapter<String, Date> {
         }
     }
     @Override
-    public String marshal(Date v) throws Exception {
+    public String marshal(Date v) {
         synchronized (dateFormat){
             return dateFormat.format(v);
         }

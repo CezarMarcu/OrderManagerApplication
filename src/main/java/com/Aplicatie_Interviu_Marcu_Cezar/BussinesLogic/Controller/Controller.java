@@ -15,9 +15,12 @@ import java.util.List;
 @RequestMapping("/admin")
 public class Controller {
 
+    //ATTRIBUTES
     private  List<Product> products = new ArrayList<>();
     private  final List<Order> orders = new ArrayList<>();
 
+
+    //MODEL ATTRIBUTES
     @ModelAttribute
     public Product getProduct(){
         return new Product();
@@ -27,16 +30,20 @@ public class Controller {
         return new Order(this.products);
     }
 
+
+    //GET REQUEST HANDLERS
     @GetMapping
     public String showProducts(Model model){
         model.addAttribute("products", this.products);
         model.addAttribute("orders",this.orders);
         return "admin";
     }
+
+
+    //POST REQUEST HANDLERS
     @PostMapping
     public String saveProducts(@Valid Product product, Errors errors){
         if(!(errors.hasErrors())){
-//            product.getPriceTag().setValue(product.getValue());
             products.add(product);
             System.out.println(product);
             return "redirect:admin";
@@ -46,8 +53,14 @@ public class Controller {
 
     @PostMapping(params="placeOrder=true")
     public String placeOrder(Order order) {
-        order.setProducts(products);
+        order.setProducts(new ArrayList<>(products));
         orders.add(order);
+        System.out.println(order);
+        products.clear();
+        System.out.println(order);
+
+
+
         return "redirect:admin";
     }
 

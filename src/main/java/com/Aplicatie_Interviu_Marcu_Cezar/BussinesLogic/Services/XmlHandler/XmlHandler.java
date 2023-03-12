@@ -4,7 +4,6 @@ import com.Aplicatie_Interviu_Marcu_Cezar.Models.Order;
 import com.Aplicatie_Interviu_Marcu_Cezar.Models.Orders;
 import com.Aplicatie_Interviu_Marcu_Cezar.Models.SupplierProducts;
 import com.mifmif.common.regex.Generex;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
@@ -34,7 +33,6 @@ public class XmlHandler {
                 new FileOutputStream("Results/Orders/"+XmlHandler.generateFileName()+".xml"));
     }
 
-
     //Method that generates a xml file for supplier
     public static void generateSupplierXmlFile(SupplierProducts supplierProducts) throws Exception {
             JAXBContext contextObj = JAXBContext.newInstance(SupplierProducts.class);
@@ -47,7 +45,6 @@ public class XmlHandler {
                             +supplierProducts.getFromOrder()+".xml")
             );
     }
-
 
     //Method that extracts the list of orders from xml file
     public static List<Order> extractObjectFromXml(File xmlFile) throws JAXBException {
