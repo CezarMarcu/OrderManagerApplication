@@ -15,7 +15,6 @@ import java.util.Random;
 @AllArgsConstructor
 @XmlRootElement(name = "product")
 public class Product {
-
     //ATTRIBUTES
     @NotEmpty(message = "Description cannot be null.")
     private String description;
@@ -32,10 +31,12 @@ public class Product {
     }
 
 
+    //GETTERS and SETTERS
     @XmlElement(name="price")
     public PriceTag getPriceTag() {
         return priceTag;
     }
+
     @XmlTransient
     public Date getOrderDate() {
         return orderDate;

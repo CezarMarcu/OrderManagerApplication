@@ -10,19 +10,21 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Data
 @XmlRootElement(name = "orders")
 public class Orders {
-
+    //ATTRIBUTES
     private List<Order> orders = new ArrayList<>();
 
+
+    //CONSTRUCTOR
     public Orders(List<Order> orders) {
         this.orders = orders;
     }
     public Orders(){}
 
+
+    //GETTERS AND SETTERS
     @XmlElement(name = "order", type = Order.class)
     public List<Order> getOrders() {
         return orders;
     }
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
-    }
+
 }

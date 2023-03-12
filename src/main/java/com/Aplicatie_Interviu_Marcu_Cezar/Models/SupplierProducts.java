@@ -8,11 +8,13 @@ import java.util.List;
 
 @XmlRootElement(name = "products")
 public class SupplierProducts {
-
+    //ATTRIBUTES
     private String fromOrder;
     private String toSupplier;
     private List<Product> products = new ArrayList<>();
 
+
+    //CONSTRUCTORS
     public SupplierProducts(String fromOrder,String toSupplier, List<Product> products) {
         this.fromOrder = fromOrder;
         this.toSupplier = toSupplier;
@@ -20,31 +22,25 @@ public class SupplierProducts {
     }
     public SupplierProducts(){}
 
+
+    //GETTERS and SETTERS
     @XmlTransient
     public String getFromOrder() {
         return fromOrder;
     }
-    public void setFromOrder(String fromOrder) {
-        this.fromOrder = fromOrder;
-    }
-
 
     @XmlElement(name="product")
     public List<Product> getProducts() {
         return products;
-    }
-    public void setProducts(List<Product> products) {
-        this.products = products;
     }
 
     @XmlTransient
     public String getToSupplier() {
         return toSupplier;
     }
-    public void setToSupplier(String toSupplier) {
-        this.toSupplier = toSupplier;
-    }
 
+
+    //METHODS
     @Override
     public String toString() {
         return "SupplierProducts{" +
