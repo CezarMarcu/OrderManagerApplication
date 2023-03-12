@@ -13,17 +13,16 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
+
 @Data
 @AllArgsConstructor
 public class Order {
 
-    //ATRIBURES
     private Date created;
     private String id;
     private List<Product> products;
 
 
-    //CONSTRUCTOR
     public Order (List<Product> products) {
         generateOrderId();
         LocalDateTime localDateTime = LocalDateTime.now();
@@ -31,14 +30,12 @@ public class Order {
         this.created = Date.from(instant);
         this.products = products;
     }
-    public Order(){}
 
 
-    //METHODS
     private void generateOrderId(){
-        int minim = 48;    // 0 in ascii
-        int maximum = 57; //  9 in ascii
-        int stringLen = 4;//  length of the numeric string
+        int minim = 48;
+        int maximum = 57;
+        int stringLen = 4;
         Random random = new Random();
         this.id = random.ints(minim,maximum)
                 .limit(stringLen)
