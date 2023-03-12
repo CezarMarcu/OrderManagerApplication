@@ -78,7 +78,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="author" class="form-label">Price</label>
-                                <input type="text" class="form-control" id="author" th:field="*{priceTag.value}"/>
+                                <input type="number" step="0.01" class="form-control" id="author" value = "$"  th:field="*{priceTag.value}"/>
                             </div>
                             <div class="mb-3">
                                 <label for="edit" class="form-label">Supplier</label>

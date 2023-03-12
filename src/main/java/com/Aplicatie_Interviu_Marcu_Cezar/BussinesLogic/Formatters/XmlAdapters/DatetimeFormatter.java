@@ -1,4 +1,4 @@
-package com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Formatters;
+package com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Formatters.XmlAdapters;
 
 import org.springframework.stereotype.Component;
 import javax.xml.bind.annotation.adapters.XmlAdapter;

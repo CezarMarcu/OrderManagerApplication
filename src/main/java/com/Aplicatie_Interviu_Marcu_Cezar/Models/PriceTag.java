@@ -1,15 +1,18 @@
 package com.Aplicatie_Interviu_Marcu_Cezar.Models;
 
+import com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Formatters.XmlAdapters.PriceFormatter;
 import lombok.Data;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.math.BigDecimal;
 
 @Data
 public class PriceTag {
     //ATTRIBUTES
     private final String currency = "USD";
-    private Double value = 0.0;
+    private BigDecimal value = BigDecimal.valueOf(0.00);
 
 
     //CONSTRUCTOR
@@ -22,8 +25,9 @@ public class PriceTag {
         return currency;
     }
 
+    @XmlJavaTypeAdapter(PriceFormatter.class)
     @XmlValue
-    public Double getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 

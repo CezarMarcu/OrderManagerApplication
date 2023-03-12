@@ -1,6 +1,6 @@
 package com.Aplicatie_Interviu_Marcu_Cezar.Models;
 
-import com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Formatters.DatetimeFormatter;
+import com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Formatters.XmlAdapters.DatetimeFormatter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import javax.xml.bind.annotation.XmlAttribute;
