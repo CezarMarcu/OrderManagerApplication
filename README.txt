@@ -2,7 +2,7 @@
     							SACOOM APPLICATION
     ====================================================================================================================*/
     	Project:    Order management application
-   	    Author:     Marcu Cezar-Constantin
+   	Author:     Marcu Cezar-Constantin
     	For:        Interview
     	Libraries:  Bootstrap,Thymeleaf,SpringBoot,Validation,Lombok,Javax,Generex,JUnit
 	
