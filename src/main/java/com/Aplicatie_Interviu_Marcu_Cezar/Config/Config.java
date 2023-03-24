@@ -5,7 +5,8 @@ import java.io.File;
 public enum Config {
 
     ORDERS("orders"),
-    SUPPLIERS("suppliers");
+    SUPPLIERS("suppliers"),
+    SUPPLIERS2("suppliers2");
 
     public final String TargetFolder;
     private final String resultsFolder = "/Results";
