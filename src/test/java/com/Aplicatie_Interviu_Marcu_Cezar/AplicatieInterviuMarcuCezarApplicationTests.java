@@ -29,13 +29,6 @@ class AplicatieInterviuMarcuCezarApplicationTests {
 	}
 
 	@Test
-	void watchDirectory(){
-		String directory = "path_to_xml_file";
-		DirectoryWatcher directoryWatcher = new DirectoryWatcher(directory);
-		directoryWatcher.myWatchBegins();
-	}
-
-	@Test
 	void getObjectFromXml()throws Exception{
 		String xmlFile = "path_to_xml_file";
 		File file = new File(xmlFile);

@@ -1,5 +1,6 @@
 package com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Services.XmlHandler;
 
+import com.Aplicatie_Interviu_Marcu_Cezar.BussinesLogic.Config;
 import com.Aplicatie_Interviu_Marcu_Cezar.Models.Order;
 import com.Aplicatie_Interviu_Marcu_Cezar.Models.Orders;
 import com.Aplicatie_Interviu_Marcu_Cezar.Models.SupplierProducts;
@@ -28,7 +29,7 @@ public class XmlHandler {
         marshallerObj1.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         Orders ordersList=new Orders(orders);
         marshallerObj1.marshal(ordersList,
-                new FileOutputStream("Results/Orders/"+XmlHandler.generateFileName()+".xml"));
+                new FileOutputStream(Config.ORDERS+XmlHandler.generateFileName()+".xml"));
     }
 
     //Method that generates a xml file for supplier
@@ -38,9 +39,7 @@ public class XmlHandler {
             marshallerObj.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshallerObj.marshal(supplierProducts,
                     new FileOutputStream(
-                            System.getProperty("user.dir") +"/Results/Suppliers/"
-                            +supplierProducts.getToSupplier()
-                            +supplierProducts.getFromOrder()+".xml")
+                            Config.SUPPLIERS +supplierProducts.getToSupplier() +supplierProducts.getFromOrder()+".xml")
             );
     }
 
