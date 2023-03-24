@@ -38,11 +38,11 @@ import java.nio.file.WatchService;
     interface. After the implementation of the Runnable Class, this one will execute on a separated thread.
 * */
 
-@SuppressWarnings("InfiniteLoopStatement")
 public class DirectoryWatcher {
 
     //ATTRIBUTE
     private final String directoryPath;
+    public static boolean running = false;
 
 
     //CONSTRUCTOR
@@ -53,6 +53,7 @@ public class DirectoryWatcher {
 
     //METHODS
     private void watchDirectory(){
+        running = true;
         try{
             //STEP 1
             WatchService watchService = FileSystems.getDefault().newWatchService();
@@ -61,7 +62,7 @@ public class DirectoryWatcher {
             //STEP 3
             WatchKey watchKey = directory.register(watchService, StandardWatchEventKinds.ENTRY_CREATE);
             //STEP 4
-            while (true) {
+            while (running) {
                 //STEP 4.1
                 for (WatchEvent<?> event : watchKey.pollEvents()) {
                     //STEP 4.2
