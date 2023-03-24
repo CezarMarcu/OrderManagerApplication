@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<products>
+    <product>
+        <description>A</description>
+        <gtin>487247268723202</gtin>
+        <price currency="USD">0.00</price>
+        <supplier>A</supplier>
+    </product>
+</products>

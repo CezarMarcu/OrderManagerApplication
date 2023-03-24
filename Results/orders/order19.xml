@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<orders>
+    <order created="2023-03-24T11:45:51" id="6162">
+        <product>
+            <description>A</description>
+            <gtin>487247268723202</gtin>
+            <price currency="USD">0.00</price>
+            <supplier>A</supplier>
+        </product>
+    </order>
+</orders>
